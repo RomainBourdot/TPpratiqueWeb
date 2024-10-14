@@ -34,7 +34,7 @@ func main() {
 	}
 
 	http.HandleFunc("/promo", func(w http.ResponseWriter, r *http.Request) {
-		etudiant1 := Etudiant{Nom: "Amaru", Prenom: "Tom", Age: 18, Sexe: "Homme"}
+		etudiant1 := Etudiant{Nom: "Amumu", Prenom: "Tom", Age: 18, Sexe: "Homme"}
 		etudiant2 := Etudiant{Nom: "Coquette", Prenom: "Tomyette", Age: 19, Sexe: "Femme"}
 
 		classe := PagePromo{NomDeClasse: "B1 Informatique", Filiere: "Informatique", Niveau: "B1", NbrEtudiant: 2,
@@ -42,6 +42,18 @@ func main() {
 
 		temp.ExecuteTemplate(w, "promo", classe)
 	})
+	type PageChange struct {
+		IsPair  bool
+		Counter int
+	}
 
-	http.ListenAndServe("localhost:8080", nil)
+	var Counter int
+
+	http.HandleFunc("/change", func(w http.ResponseWriter, r *http.Request) {
+		Counter++
+		data := PageChange{Counter: Counter, IsPair: Counter%2 == 0}
+
+		temp.ExecuteTemplate(w, "change", data)
+	})
+	http.ListenAndServe("localhost:8000", nil)
 }
