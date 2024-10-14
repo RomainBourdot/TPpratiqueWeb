@@ -1,0 +1,41 @@
+{{define "promo"}}
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/promo.css">
+    <title>Promo</title>
+</head>
+
+<body>
+
+    
+    <div class="promo">
+        <h1>La classe : {{.NomDeClasse}}</h1>
+        <p>La filière : {{.Filiere}}</p>
+        <p>Le niveau : {{.Niveau}}</p>
+        <p>Le nombre d'étudiant : {{.NbrEtudiant}}</p>
+        <p>Voici les étudiants présents dans cette classe : </p>
+        <div class="etudiants">
+            {{range .ListEtudiant}}
+            <p>{{.Nom}} {{.Prenom}} {{.Age}} ans, </p>
+            {{if eq .Sexe "Homme"}}
+            <div class="homme">
+                <p>sexe : </p><img src="https://static.vecteezy.com/ti/vecteur-libre/p3/5136932-homme-sexe-symbole-icone-genre-symbole-simple-silhouette-icone-noir-isole-sur-fond-blanc-vector-illustration-gratuit-vectoriel.jpg" alt="">
+            </div>
+            {{else}}
+            <div class="femme">
+                <p>sexe : </p>
+                <img src="https://image.freepik.com/free-icon/female-gender-symbol_318-54605.jpg" alt="">
+
+            </div>
+        </div>
+        {{end}}
+        {{end}}
+    </div>
+</body>
+
+</html>
+{{end}}
